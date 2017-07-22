@@ -33,6 +33,7 @@ app.get('/insurer/submit_price', (req, res) => {
 
 app.get('/insurer/action', (req, res) => {
     // insurer accepts, denies or sumbits to review a given claim
+    
 })
 
 app.get('/expert/action', (req, res) => {
