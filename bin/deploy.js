@@ -22,6 +22,10 @@ ContractFactory.new(
     function(err, contract){
         if (typeof contract.address !== 'undefined') {
             console.log('Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
+            fs.writeFileSync(
+                path.resolve(__dirname, '../contracts/contract.json'),
+                JSON.stringify({byte: byte, abi: abi, address: contract.address})
+            )
         }
     }
 )
