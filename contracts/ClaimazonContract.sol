@@ -67,11 +67,11 @@ contract ClaimazonContract {
         ACTIONS ON POLICY 
     */
     
-    // function actionOnPolicy(uint _id, )
-    
-    
-    
-    
+    function actionOnPolicy(uint _id, string action ) {
+        // Insurer makes an action on policy
+        Policy policy = policyAt[_id];
+        policy.status = action;
+    }
     
     
     function getPolicy(uint _id) constant returns(uint, uint, uint, uint, 
