@@ -16,9 +16,17 @@ const byte = JSON.parse(file).byte
 const abi = JSON.parse(file).abi
 const address = JSON.parse(file).address
 
-console.log(abi, address)
+chainApi.contract_setter(abi, address, 'proposePolicy', [0, '1 november 2016', '10 november 2016', 'car'] )
+.then((err, res)=>{
+    if (err) console.log(err)
+    if (res) return res;
+})
+.then(()=>{
+    const data = chainApi.contract_getter(abi, address, 'getPolicy', [0])
+    console.log(data)
+})
 
-// const data = chainApi.contract_getter(abi, address, 'getPolicy', [id])
+
 
 app.use(cors())
 
