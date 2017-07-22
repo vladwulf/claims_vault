@@ -12,6 +12,9 @@ const HOST = 'localhost';
 
 
 app.get('/insured/submit_policy', (req, res) => {
+    const id = req.query.id;
+    const type = req.query.type;
+    chainApi.contract_set
     // insured submits a policy
 })
 
@@ -34,6 +37,15 @@ app.get('/expert/action', (req, res) => {
 
 app.get('/claimant/make_claim', (req, res) => {
     // claimant makes a claim
+})
+
+app.get ('/login', (req, res) =>{
+    const username = req.query.username;
+    const password = req.query.password;
+
+    // check if pair is correct in mongo
+
+    // if yes redirect to the user type
 })
 
 
