@@ -15,8 +15,8 @@ export default class Hero extends Component {
       <div>
         <Container fluid id="hero-container">
             <div id="hero-text">
-                <h1>Claimazon</h1>
-                <h4>crafter by simply business</h4>
+                <h1>ClaimsVault</h1>
+                <h4>crafted by simply hackers</h4>
             </div>
             
         </ Container>

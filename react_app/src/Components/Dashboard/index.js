@@ -7,37 +7,90 @@ import './main.css'
 export default class Dashboard extends Component{
   constructor(props){
     super(props);
+    this.state = {
+      policy_id: '',
+      policy_type: '',
+      policy_start: '',
+      policy_stop: '',
+      formLoading: false,
+      submitButtonColor: 'black'
+    }
   }
+
+
+  submitPolicy(){
+    this.setState({
+      formLoading: true
+    })
+    axios.get('http://127.0.0.1:5000/insured/submit_policy',{
+      params: {
+        id: this.state.policy_id,
+        start: this.state.policy_start,
+        end: this.state.policy_stop,
+        type: this.state.policy_type
+      }
+    }).then((res) =>{
+      console.log(res)
+      if(res.data.msg === 'success'){
+        this.setState({
+          formLoading: false,
+          submitButtonColor: 'green'
+        })
+        this.onUserChange(res.data.username);
+      }
+      else {
+        this.setState({
+          formLoading: false,
+          submitButtonColor: 'red'
+        })
+      }
+    })
+    .catch((err) =>{
+      console.log(err)
+    })
+  }
+
+
+  updateInput(input, evt){
+    this.setState({
+      [input]: evt.target.value
+    })
+    console.log(`${input} => ${evt.target.value}`)
+  }
+
   render(){
     if(this.props.user === 'vlad'){
       return(
         <Container className="dash-form">
-          <h2>Propose policy</h2>
+          <h2>Submit policy</h2>
           <Form>
             <Form.Group widths='equal'>
               <Form.Field>
                 <label>Policy ID</label>
-                <input placeholder='Policy ID' />
+                <input placeholder='Policy ID' 
+                onChange={evt => this.updateInput('policy_id', evt)} />
               </Form.Field>
               <Form.Field>
                 <label>Policy Type</label>
-                <input placeholder='Policy Type' />
+                <input placeholder='Policy Type'
+                onChange={evt => this.updateInput('policy_type', evt)} />
               </Form.Field>
             </Form.Group>
             <Form.Group widths='equal'>
               <Form.Field>
                 <label>Policy Start Date</label>
-                <input placeholder='Policy Start Date' />
+                <input placeholder='Policy Start Date'
+                onChange={evt => this.updateInput('policy_start', evt)} />
               </Form.Field>
               <Form.Field>
                 <label>Policy End Date</label>
-                <input placeholder='Policy End Date' />
+                <input placeholder='Policy End Date'
+                onChange={evt => this.updateInput('policy_stop', evt)} />
               </Form.Field>
             </Form.Group>
-            <Form.Field>
-              <Checkbox label='I agree to the Terms and Conditions' />
-            </Form.Field>
-            <Button type='submit'>Submit</Button>
+            <Button color={this.state.submitButtonColor} 
+            loading={this.state.formLoading} 
+            onClick={() => {this.submitPolicy()}}>Submit</Button>
           </Form>
         </Container>
       )

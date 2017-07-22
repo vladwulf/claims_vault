@@ -16,17 +16,6 @@ const byte = JSON.parse(file).byte
 const abi = JSON.parse(file).abi
 const address = JSON.parse(file).address
 
-chainApi.contract_setter(abi, address, 'proposePolicy', [0, '1 november 2016', '10 november 2016', 'car'] )
-.then((err, res)=>{
-    if (err) console.log(err)
-    if (res) return res;
-})
-.then(()=>{
-    const data = chainApi.contract_getter(abi, address, 'getPolicy', [0])
-    console.log(data)
-})
-
-
 
 app.use(cors())
 
@@ -43,10 +32,20 @@ let db = {
 
 
 app.get('/insured/submit_policy', (req, res) => {
-    const id = req.query.id;
-    const type = req.query.type;
-    chainApi.contract_set
     // insured submits a policy
+    const id = req.query.id;
+    const start = req.query.start;
+    const end = req.query.end;
+    const type = req.query.type;
+    
+    chainApi.contract_setter(abi, address, 'proposePolicy', [id, start, end, type] )
+    .then((result)=>{
+        res.send({msg: 'success'});
+        
+    }).catch((error)=>{
+        console.log(error);
+        res.send({msg: 'error'});
+    })
 })
 
 app.get('/insured/accept_policy', (req, res) => {
@@ -71,7 +70,7 @@ app.get('/claimant/make_claim', (req, res) => {
 })
 
 
-app.get('/getPolicy', (req,res)=>{
+app.get('/getPolicy', (req, res)=>{
     const id = req.query.id;
     const data = chainApi.contract_getter(abi, address, 'getPolicy', [id])
     res.send(data);
@@ -104,6 +103,6 @@ app.get ('/login', (req, res) =>{
 
 
 
-// app.listen(PORT, HOST, (req, res) => {
-//     console.log(`listening from ${HOST}:${PORT}`)
-// })
+app.listen(PORT, HOST, (req, res) => {
+    console.log(`listening from ${HOST}:${PORT}`)
+})
