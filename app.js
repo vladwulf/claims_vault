@@ -1,14 +1,24 @@
 var express = require('express');
 var app = express();
 var fs = require('fs');
+var cors = require('cors')
 
 const chainApi = require('./lib/core')('http://127.0.0.1:8545');
 
-console.log(chainApi.get_accounts());
+// console.log(chainApi.get_accounts());
+
+
+app.use(cors())
 
 
 const PORT = 5000;
 const HOST = 'localhost';
+
+let db = {
+    vlad: '0000',
+    jenny: '1111',
+    craig: '2222'
+}
 
 
 app.get('/insured/submit_policy', (req, res) => {
@@ -39,10 +49,25 @@ app.get('/claimant/make_claim', (req, res) => {
     // claimant makes a claim
 })
 
+
+
 app.get ('/login', (req, res) =>{
+    
     const username = req.query.username;
     const password = req.query.password;
 
+    console.log(username, password, db[username])
+    if (db[username] === password){
+        res.send({
+            msg: 'success',
+            username: username
+        })
+    }
+    else {
+        res.send({
+            msg: 'error'
+        })
+    }
     // check if pair is correct in mongo
 
     // if yes redirect to the user type
@@ -51,6 +76,6 @@ app.get ('/login', (req, res) =>{
 
 
 
-// app.listen(PORT, HOST, (req, res) => {
-//     console.log(`listening from ${HOST}:${PORT}`)
-// })
+app.listen(PORT, HOST, (req, res) => {
+    console.log(`listening from ${HOST}:${PORT}`)
+})

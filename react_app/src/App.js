@@ -4,25 +4,41 @@ import './App.css';
 
 import NavBar from './Components/NavBar';
 import Hero from './Components/Hero';
+import LoginModal from './Components/LoginModal';
 
 class App extends Component {
   constructor(props){
     super(props);
-    this.state = { x: 4 }
+    this.state = {route: 'home'};
   }
 
   onChange(field, value){
-    console.log(field,value);
     this.setState({[field]: value})
   }
 
   render() {
-    return (
-      <div className="App">
+    if(this.state.route === 'login'){
+      return (
+        <div className="App">
+          <NavBar onChange={this.onChange.bind(this)} />
+          <Hero />
+          <LoginModal />
+        </div>
+      );
+    }
+    else if(this.state.route === 'claim') {
+      return(
         <NavBar onChange={this.onChange.bind(this)} />
-        <Hero />
-      </div>
-    );
+      );
+    }
+    else {
+      return (
+        <div className="App">
+          <NavBar onChange={this.onChange.bind(this)} />
+          <Hero />
+        </div>
+      );
+    }
   }
 }
 
