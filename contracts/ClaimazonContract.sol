@@ -24,7 +24,6 @@ contract ClaimazonContract {
         bool isLive;
         
         mapping (uint => Claim) claimsAt;
-        uint claimsCounter;
     }
     mapping (uint => Policy) policyAt;
     
@@ -33,10 +32,10 @@ contract ClaimazonContract {
         CREATION OF POLICY 
     */
     
-    function proposePolicy(uint _id, string _start, string _end, string _type) {
+    function proposePolicy(uint _policyId, string _start, string _end, string _type) {
         // Insured proposes a policy
-        Policy policy = policyAt[_id];
-        policy.id = _id;
+        Policy policy = policyAt[_policyId];
+        policy.id = _policyId;
         policy.start = _start;
         policy.end = _end;
         policy.policy_type = _type;
@@ -57,16 +56,18 @@ contract ClaimazonContract {
     /*
         CLAIM OF POLICY 
     */
+    
 
-    function claim(uint _id, uint _claim, string _type, string _name, string _date ){
-        Policy policy = policyAt[_id];
-        Claim claim = policy.claimsAt[policy.claimsCounter];
+    function makeClaim(uint _policyId, uint _claimId, uint _claim, string _type, string _name, string _date ){
+        Policy policy = policyAt[_policyId];
+        Claim claim = policy.claimsAt[_claimId];
         
+        claim.policy_id = _policyId;
+        claim.claim_id = _claimId;
         claim.claim = _claim;
         claim.peril_type = _type;
         claim.name = _name;
         claim.loss_date = _date;
-        policy.claimsCounter++;
     }
     
     /*
@@ -80,9 +81,9 @@ contract ClaimazonContract {
         claim.status = _status;
     }
 
-    function getPolicy(uint _id) constant returns(uint, uint, uint, uint, 
+    function getPolicy(uint _policyId) constant returns(uint, uint, uint, uint, 
         string, string, string, bool){
-        Policy policy = policyAt[_id];
+        Policy policy = policyAt[_policyId];
         return (
             policy.id,
             policy.agreed_claim,
