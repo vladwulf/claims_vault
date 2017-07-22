@@ -48,7 +48,7 @@ contract ClaimazonContract {
     function proposePrice(uint _id, uint price) {
         // Insurer proposes a price after a policy has been submitted
         Policy policy = policyAt[_id];
-        policy.max_price = price;
+        policy.max_limit = price;
     }
     
     function acceptPolicy(uint _id) {
@@ -60,8 +60,17 @@ contract ClaimazonContract {
     /*
         CLAIM OF POLICY 
     */
-    
-    
+
+    function claim(uint _id, uint _claim, string _type, string _name, string _date ){
+        Policy policy = policyAt[_id];
+        Claim claim = policy.claimsAt[policy.claimsCounter];
+        
+        claim.claim = _claim;
+        claim.peril_type = _type;
+        claim.name = _name;
+        claim.loss_date = _date;
+        policy.claimsCounter++;
+    }
     
     /*
         ACTIONS ON POLICY 
@@ -79,9 +88,9 @@ contract ClaimazonContract {
         Policy policy = policyAt[_id];
         return (
             policy.id,
-            policy.claimed_price,
-            policy.real_price,
-            policy.max_price,
+            policy.agreed_claim,
+            policy.max_limit,
+            policy.premium,
             policy.start,
             policy.end,
             policy.policy_type,
