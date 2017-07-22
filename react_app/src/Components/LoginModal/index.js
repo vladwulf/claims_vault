@@ -27,6 +27,7 @@ export default class LoginModal extends Component{
         this.setState({
           connection: 'Password is correct!'
         })
+        this.onUserChange(res.data.username);
       }
       else {
         this.setState({
@@ -39,6 +40,10 @@ export default class LoginModal extends Component{
     })
   }
 
+  onUserChange(user){
+    this.props.onChange('user', user)
+  }
+
   closeModal(){
     this.setState({
       modalOpen: false
@@ -49,7 +54,6 @@ export default class LoginModal extends Component{
     this.setState({
       [input]: evt.target.value
     })
-    console.log(input, evt.target.value);
   }
 
   render(){
