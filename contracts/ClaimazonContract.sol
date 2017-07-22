@@ -3,7 +3,6 @@ pragma solidity ^0.4.12;
 
 contract ClaimazonContract {
     
-    
     struct Claim {
         uint policy_id;
         uint claim_id;
@@ -11,9 +10,8 @@ contract ClaimazonContract {
         string peril_type;
         string name;
         string loss_date;
-        
+        string status;
     }
-    
     
     struct Policy {
         uint id;
@@ -23,7 +21,6 @@ contract ClaimazonContract {
         string start;
         string end;
         string policy_type;
-        string status;
         bool isLive;
         
         mapping (uint => Claim) claimsAt;
@@ -76,15 +73,15 @@ contract ClaimazonContract {
         ACTIONS ON POLICY 
     */
     
-    function actionOnPolicy(uint _id, string action ) {
-        // Insurer makes an action on policy
-        Policy policy = policyAt[_id];
-        policy.status = action;
+    function actionOnPolicy(uint _policyId, uint _claimId, string _status ) {
+        // Insurer or expert makes an action on claim
+        Policy  policy = policyAt[_policyId];
+        Claim claim = policy.claimsAt[_claimId];
+        claim.status = _status;
     }
-    
-    
+
     function getPolicy(uint _id) constant returns(uint, uint, uint, uint, 
-        string, string, string, string, bool){
+        string, string, string, bool){
         Policy policy = policyAt[_id];
         return (
             policy.id,
@@ -94,8 +91,22 @@ contract ClaimazonContract {
             policy.start,
             policy.end,
             policy.policy_type,
-            policy.status,
             policy.isLive
+        );
+    }
+
+    function getClaim(uint _policyId, uint _claimId) constant 
+        returns(uint, uint, uint, string, string, string, string){
+        Policy  policy = policyAt[_policyId];
+        Claim claim = policy.claimsAt[_claimId];
+        return (
+            claim.policy_id,
+            claim.claim_id,
+            claim.claim,
+            claim.peril_type,
+            claim.name,
+            claim.loss_date,
+            claim.status
         );
     }
 }
