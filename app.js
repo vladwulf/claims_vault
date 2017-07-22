@@ -1,4 +1,5 @@
 var express = require('express');
+var exphbs  = require('express-handlebars');
 var app = express();
 var Web3 = require('web3');
 var fs = require('fs');
@@ -9,11 +10,13 @@ const HOST = 'localhost';
 
 
 app.use(express.static('public'))
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
 
 
 app.get('/', (req, res) =>{
-    res.render('index')
+    res.render('index', {data: 'This is coming from handlebars'})
 })
 
 app.get('/insured/submit_policy', (req, res) => {
