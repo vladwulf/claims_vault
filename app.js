@@ -8,6 +8,18 @@ const chainApi = require('./lib/core')('http://127.0.0.1:8545');
 // console.log(chainApi.get_accounts());
 
 
+
+
+const path = require('path')
+const file = fs.readFileSync(path.resolve(__dirname, 'contracts/contract.json'))
+const byte = JSON.parse(file).byte
+const abi = JSON.parse(file).abi
+const address = JSON.parse(file).address
+
+console.log(abi, address)
+
+// const data = chainApi.contract_getter(abi, address, 'getPolicy', [id])
+
 app.use(cors())
 
 
@@ -19,6 +31,7 @@ let db = {
     jenny: '1111',
     craig: '2222'
 }
+
 
 
 app.get('/insured/submit_policy', (req, res) => {
@@ -50,6 +63,13 @@ app.get('/claimant/make_claim', (req, res) => {
 })
 
 
+app.get('/getPolicy', (req,res)=>{
+    const id = req.query.id;
+    const data = chainApi.contract_getter(abi, address, 'getPolicy', [id])
+    res.send(data);
+})
+
+
 
 app.get ('/login', (req, res) =>{
     
@@ -76,6 +96,6 @@ app.get ('/login', (req, res) =>{
 
 
 
-app.listen(PORT, HOST, (req, res) => {
-    console.log(`listening from ${HOST}:${PORT}`)
-})
+// app.listen(PORT, HOST, (req, res) => {
+//     console.log(`listening from ${HOST}:${PORT}`)
+// })

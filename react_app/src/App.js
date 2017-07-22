@@ -5,6 +5,8 @@ import './App.css';
 import NavBar from './Components/NavBar';
 import Hero from './Components/Hero';
 import LoginModal from './Components/LoginModal';
+import Dashboard from './Components/Dashboard';
+import Claimant from './Components/Claimant';
 
 class App extends Component {
   constructor(props){
@@ -34,7 +36,10 @@ class App extends Component {
       }
       else if(this.state.route === 'claim') {
         return(
-          <NavBar onChange={this.onChange.bind(this)} />
+          <div className="App">
+            <NavBar onChange={this.onChange.bind(this)} />
+            <Claimant />
+          </div>
         );
       }
       else {
@@ -46,9 +51,31 @@ class App extends Component {
         );
       }
     } else {
-      return(
-        <h1>spaghetti code </h1>
-      )
+      if(this.state.user === 'vlad'){
+        return(
+          <div className="App">
+            <NavBar onChange={this.onChange.bind(this)} />
+            <Dashboard user='vlad' />
+          </div>
+        )
+      }
+      if(this.state.user === 'jenny'){
+        return(
+          <div className="App">
+            <NavBar onChange={this.onChange.bind(this)} />
+            <Dashboard user='jenny' />
+          </div>
+        )
+      }
+      if(this.state.user === 'craig'){
+        return(
+          <div className="App">
+            <NavBar onChange={this.onChange.bind(this)} />
+            <Dashboard user='craig' />
+          </div>
+        )
+      }
+      
     }
   }
 }

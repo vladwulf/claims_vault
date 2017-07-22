@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Header, Icon, Modal, Form } from 'semantic-ui-react'
 
-import Request from 'react-http-request';
 import axios from 'axios';
 
 export default class LoginModal extends Component{

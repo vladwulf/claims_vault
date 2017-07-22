@@ -1,6 +1,10 @@
 const Web3 = require('web3');
 const web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:8545'));
 
+
+// sanity check sometimes you need to make a simple connection to the blockchain first
+console.log(web3.eth.accounts)
+
 const fs = require('fs');
 const path = require('path')
 
