@@ -11,6 +11,9 @@ contract ClaimazonContract {
         string name;
         string loss_date;
         string status;
+        string location;
+        string description;
+        string supporting_element;
     }
     
     struct Policy {
@@ -59,7 +62,8 @@ contract ClaimazonContract {
     */
     
 
-    function makeClaim(uint _policyId, uint _claimId, uint _claim, string _type, string _name, string _date ){
+    function makeClaim(uint _policyId, uint _claimId, uint _claim, 
+        string _type, string _name, string _date, string _location, string _descr, string _supp_element){
         Policy policy = policyAt[_policyId];
         Claim claim = policy.claimsAt[_claimId];
         
@@ -69,6 +73,9 @@ contract ClaimazonContract {
         claim.peril_type = _type;
         claim.name = _name;
         claim.loss_date = _date;
+        claim.location = _location;
+        claim.description = _descr;
+        claim.supporting_element = _supp_element;
     }
     
     /*
@@ -99,17 +106,18 @@ contract ClaimazonContract {
     }
 
     function getClaim(uint _policyId, uint _claimId) constant 
-        returns(uint, uint, uint, string, string, string, string){
+        returns(uint, string, string, string, string, string, string, string){
         Policy  policy = policyAt[_policyId];
         Claim claim = policy.claimsAt[_claimId];
         return (
-            claim.policy_id,
-            claim.claim_id,
             claim.claim,
             claim.peril_type,
             claim.name,
             claim.loss_date,
-            claim.status
+            claim.status,
+            claim.location,
+            claim.description,
+            claim.supporting_element
         );
     }
 }
