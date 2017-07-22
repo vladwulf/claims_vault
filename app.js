@@ -1,23 +1,15 @@
 var express = require('express');
-var exphbs  = require('express-handlebars');
 var app = express();
-var Web3 = require('web3');
 var fs = require('fs');
 
+const chainApi = require('./lib/core')('http://127.0.0.1:8545');
 
-const PORT = 3000;
+console.log(chainApi.get_accounts());
+
+
+const PORT = 5000;
 const HOST = 'localhost';
 
-
-app.use(express.static('public'))
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
-
-
-
-app.get('/', (req, res) =>{
-    res.render('index', {data: 'This is coming from handlebars'})
-})
 
 app.get('/insured/submit_policy', (req, res) => {
     // insured submits a policy
@@ -33,7 +25,7 @@ app.get('/insurer/submit_price', (req, res) => {
 
 app.get('/insurer/action', (req, res) => {
     // insurer accepts, denies or sumbits to review a given claim
-    
+
 })
 
 app.get('/expert/action', (req, res) => {
@@ -47,6 +39,6 @@ app.get('/claimant/make_claim', (req, res) => {
 
 
 
-app.listen(PORT, HOST, (req, res) => {
-    console.log(`listening from ${HOST}:${PORT}`)
-})
+// app.listen(PORT, HOST, (req, res) => {
+//     console.log(`listening from ${HOST}:${PORT}`)
+// })
