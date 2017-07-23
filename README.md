@@ -1,6 +1,13 @@
-# ClaimsVault
+# Idea name - ClaimsVault
 
-## Preconditions
+#### We are trying to build Self service platform for third-party claim submission. It would have following features:
+
+* Third party claims, liked to Policy and Coverage 
+* Stores/shares digital artificats, evidance of claim with authorised stakeholders
+* Secure permission based access to stakeholders
+* Controls workflow programmatically, automation via 'Clever Contracts' 
+
+### Preconditions for project setup
 * Install following software/frameworks to your machine:
 
 1. To check if you have Node.js installed, run this command in your terminal:
@@ -20,7 +27,7 @@
 4. Install mongoose (http://mongoosejs.com/docs/)
   $ npm install mongoose
 
-## Running the project
+### Running the project
 
 checkout the repo from https://github.com/VladWulf/claims_vault
 Go to your project directory
@@ -58,7 +65,7 @@ cd react_app
 npm start
 ```
 
-## People 
+### People 
 1. https://github.com/VladWulf
 
 2. https://github.com/polleykc
