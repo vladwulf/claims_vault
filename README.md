@@ -23,21 +23,21 @@
 checkout the repo from https://github.com/VladWulf/claims_vault
 Go to your project directory
 1. Install the required project dependency (packages)
-'''
+```
 $ npm i
-'''
+```
 2. now jump to react_app directory which contains our react app
-'''
+```
 $ cd react_app
-'''
+```
 3. install the required project dependency (packages)
-'''
+```
 $ npm i
-'''
+```
 4. now come back to main directory
-'''
+```
 $ cd ..
-'''
+```
 NB: You need to have at least a blockchain node running on localhost:8545 (rpc)
 
 5.  Deploy contract
