@@ -7,14 +7,16 @@
   $ node -v
   To confirm that you have npm installed you can run this command in your terminal:
   $ npm -v
-
   if not installed - install npm from https://www.npmjs.com/ and run the above 2 commands again
+  
 2. Project uses lerna (A tool for managing JavaScript projects with multiple packages)
   $ npm install --global lerna
+  
 3. Install express (https://expressjs.com/ - Express is a minimal and flexible Node.js web application framework)
   $ npm install express --save
   and
   $ npm install express-handlebars
+  
 4. Install mongoose (http://mongoosejs.com/docs/)
   $ npm install mongoose
 
@@ -57,7 +59,11 @@ npm start
 ```
 
 ## People 
-https://github.com/VladWulf
-https://github.com/ashutoshchauhan13
-https://github.com/polleykc
-https://github.com/varriola
+1. https://github.com/VladWulf
+
+2. https://github.com/polleykc
+
+3. https://github.com/varriola
+
+4. https://github.com/ashutoshchauhan13
+
