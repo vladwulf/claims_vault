@@ -80,11 +80,29 @@ app.get('/insured/submit_policy', (req, res) => {
 
 
 app.get('/insured/accept_policy', (req, res) => {
-    // insured submits a price after valuation of policy
+    const id = req.query.id;
+    chainApi.contract_setter(abi, address, 'acceptPolicy', [id] )
+    .then((result)=>{
+        res.send({msg: 'success'});
+        
+    }).catch((error)=>{
+        console.log(error);
+        res.send({msg: 'error'});
+    })
 })
 
 app.get('/insurer/submit_price', (req, res) => {
-    // insured accepts the policy
+    const id = req.query.id;
+    const premium = req.query.premium;
+    const max = req.query.max;
+    chainApi.contract_setter(abi, address, 'proposePrice', [id, max, premium] )
+    .then((result)=>{
+        res.send({msg: 'success'});
+        
+    }).catch((error)=>{
+        console.log(error);
+        res.send({msg: 'error'});
+    })
 })
 
 app.get('/insurer/action', (req, res) => {

@@ -23,7 +23,7 @@ export default class Dashboard extends Component{
     return new Promise((resolve, reject)=>{
       axios.get('http://127.0.0.1:5000/getPolicies',{
         params: {
-          user: this.props.user,
+          user: 'insured',
         }
       }).then((res) =>{
         if(res.data.msg === 'success'){
@@ -145,60 +145,48 @@ export default class Dashboard extends Component{
             </div>
           )
         }
-        
-
-
-        
+      
       }
     }
     else if (this.props.user === 'insurer'){
-      return(
-        <Container className="dash-form">
-          <h2>Propose policy</h2>
-          <Form>
-            <Form.Group widths='equal'>
-              <Form.Field>
-                <label>Policy ID</label>
-                <input placeholder='Policy ID' />
-              </Form.Field>
-              <Form.Field>
-                <label>Policy Type</label>
-                <input placeholder='Policy Type' />
-              </Form.Field>
-            </Form.Group>
-            <Form.Group widths='equal'>
-              <Form.Field>
-                <label>Policy Start Date</label>
-                <input placeholder='Policy Start Date' />
-              </Form.Field>
-              <Form.Field>
-                <label>Policy End Date</label>
-                <input placeholder='Policy End Date' />
-              </Form.Field>
-            </Form.Group>
-            <Form.Group widths='equal'>
-              <Form.Field>
-                <label>Max Limit</label>
-                <input placeholder='Max Limit' />
-              </Form.Field>
-              <Form.Field>
-                <label>Premium</label>
-                <input placeholder='Premium' />
-              </Form.Field>
-            </Form.Group>
-            <Form.Field>
-              <Checkbox label='I agree to the Terms and Conditions' />
-            </Form.Field>
-            <Button type='submit'>Submit</Button>
-          </Form>
-        </Container>
-      )
-    }
-    else if (this.props.user === 'expert'){
-      return(
-        <h1>This is {this.props.user}</h1>
-      )
-    }
-    
+      if(this.props.action == 0){
+          // we get all policies from db and create iterable
+          this.getPolicies()
+          .then((res)=>{
+            console.log('YOLOOOO', res)
+            const policies = res.map((policy)=>{
+              return <Policy user={this.props.user} id={policy[0]} start={policy[4]}
+              end={policy[5]} type={policy[6]} premium={policy[3]}
+              max={policy[2]} isLive={policy[7].toString()} />
+            })
+            // console.log(policies)
+            this.setState({
+              policies: policies
+            })
+          })
+          if(this.state.policies.length === 0){
+            return <p>loading</p>
+          }
+          else {
+            return (
+              <div>
+                {this.state.policies}
+              </div>
+            )
+          }
+        }
+        else if (this.props.user === 'expert'){
+          return(
+            <h1>This is {this.props.user}</h1>
+          )
+        }
+      }
+      else if(this.props.action == 1){
+        return(
+          <div>
+            action 2
+          </div>
+        )
+      }
   }
 }
