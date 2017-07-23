@@ -60,7 +60,7 @@ export default class Policy extends Component {
         })
         axios.get('http://127.0.0.1:5000/insurer/submit_price',{
           params: {
-            user: this.props.user,
+            id: this.props.id,
             max: this.state.max,
             premium: this.state.premium
           }
@@ -110,7 +110,7 @@ export default class Policy extends Component {
                     </Card>
                 )
             }
-            else if(this.props.isLive.toString() == 'false' && parseInt(this.props.premium) === 0) {
+            else if(this.props.isLive.toString() === 'false' && parseInt(this.props.premium) === 0) {
                 // if insured but no insurer feedback yet
                 return(
                     <Card>
@@ -157,6 +157,7 @@ export default class Policy extends Component {
                             </Card.Description>
                             <Card.Content extra>
                                 <Button basic compact
+                                onClick={()=>{this.acceptPrice()}}
                                 color={this.state.buttonColor}
                                 loading={this.state.buttonLoading}
                                 color='green'>Accept</Button>
@@ -167,7 +168,7 @@ export default class Policy extends Component {
             }
         }
         if(this.props.user === 'insurer'){
-            if(this.props.premium == 0){
+            if(this.props.premium.toString() === '0'){
                 // if insured and no choice yet
                 return(
                     <Card>
@@ -194,7 +195,7 @@ export default class Policy extends Component {
                     </Card>
                 )
             }
-            else if(this.props.premium > 0 && this.props.isLive == false) {
+            else if(this.props.premium.toString() !== '0' && this.props.isLive.toString() === 'false') {
                 // if insured and premium chosen but not accepted
                 return(
                     <Card>
@@ -217,7 +218,7 @@ export default class Policy extends Component {
                     </Card>
                 )
             }
-            else if (this.props.premium > 0 && this.props.isLive == true){
+            else if (this.props.premium.toString() !== '0' && this.props.isLive.toString() === 'true'){
                 return(
                     <Card>
                         <Card.Content>

@@ -95,6 +95,7 @@ app.get('/insurer/submit_price', (req, res) => {
     const id = req.query.id;
     const premium = req.query.premium;
     const max = req.query.max;
+    console.log(id, premium, max)
     chainApi.contract_setter(abi, address, 'proposePrice', [id, max, premium] )
     .then((result)=>{
         res.send({msg: 'success'});

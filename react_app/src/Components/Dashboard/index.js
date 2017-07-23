@@ -125,7 +125,7 @@ export default class Dashboard extends Component{
         this.getPolicies()
         .then((res)=>{
           console.log('YOLOOOO', res)
-          const policies = res.map((policy)=>{
+          let policies = res.map((policy)=>{
             return <Policy user={this.props.user} id={policy[0]} start={policy[4]}
             end={policy[5]} type={policy[6]} premium={policy[3]}
             max={policy[2]} isLive={policy[7].toString()} />
@@ -150,34 +150,28 @@ export default class Dashboard extends Component{
     }
     else if (this.props.user === 'insurer'){
       if(this.props.action == 0){
-          // we get all policies from db and create iterable
-          this.getPolicies()
-          .then((res)=>{
-            console.log('YOLOOOO', res)
-            const policies = res.map((policy)=>{
-              return <Policy user={this.props.user} id={policy[0]} start={policy[4]}
-              end={policy[5]} type={policy[6]} premium={policy[3]}
-              max={policy[2]} isLive={policy[7].toString()} />
-            })
-            // console.log(policies)
-            this.setState({
-              policies: policies
-            })
+        // we get all policies from db and create iterable
+        this.getPolicies()
+        .then((res)=>{
+          console.log('YOLOOOO', res)
+          let policies = res.map((policy)=>{
+            return <Policy user={this.props.user} id={policy[0]} start={policy[4]}
+            end={policy[5]} type={policy[6]} premium={policy[3]}
+            max={policy[2]} isLive={policy[7].toString()} />
           })
-          if(this.state.policies.length === 0){
-            return <p>loading</p>
-          }
-          else {
-            return (
-              <div>
-                {this.state.policies}
-              </div>
-            )
-          }
+          // console.log(policies)
+          this.setState({
+            policies: policies
+          })
+        })
+        if(this.state.policies.length === 0){
+          return(<p>loading</p>)
         }
-        else if (this.props.user === 'expert'){
-          return(
-            <h1>This is {this.props.user}</h1>
+        else {
+          return (
+            <div>
+              {this.state.policies}
+            </div>
           )
         }
       }
@@ -188,5 +182,11 @@ export default class Dashboard extends Component{
           </div>
         )
       }
+    }
+    else if (this.props.user === 'expert'){
+      return(
+        <h1>This is {this.props.user}</h1>
+      )
+    }   
   }
 }
