@@ -8,7 +8,7 @@
 * Controls workflow programmatically, automation via 'Clever Contracts' 
 
 ### Preconditions for project setup
-https://github.com/VladWulf/claims_vault/blob/master/technologies.png
+<a target="_blank" href="http://www.hostingpics.net" title="Hebergeur d'image"><img src="https://img15.hostingpics.net/pics/362122technologies.png" border="0" alt="Hebergeur d'image" /></a>
 
 * Install following software/frameworks to your machine:
 
