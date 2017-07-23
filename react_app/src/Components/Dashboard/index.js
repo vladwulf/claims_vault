@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Form, Checkbox, Container} from 'semantic-ui-react'
+import Policy from './Policy';
 
 import axios from 'axios';
 import './main.css'
@@ -60,40 +61,53 @@ export default class Dashboard extends Component{
 
   render(){
     if(this.props.user === 'vlad'){
-      return(
-        <Container className="dash-form">
-          <h2>Submit policy</h2>
-          <Form>
-            <Form.Group widths='equal'>
-              <Form.Field>
-                <label>Policy ID</label>
-                <input placeholder='Policy ID' 
-                onChange={evt => this.updateInput('policy_id', evt)} />
-              </Form.Field>
-              <Form.Field>
-                <label>Policy Type</label>
-                <input placeholder='Policy Type'
-                onChange={evt => this.updateInput('policy_type', evt)} />
-              </Form.Field>
-            </Form.Group>
-            <Form.Group widths='equal'>
-              <Form.Field>
-                <label>Policy Start Date</label>
-                <input placeholder='Policy Start Date'
-                onChange={evt => this.updateInput('policy_start', evt)} />
-              </Form.Field>
-              <Form.Field>
-                <label>Policy End Date</label>
-                <input placeholder='Policy End Date'
-                onChange={evt => this.updateInput('policy_stop', evt)} />
-              </Form.Field>
-            </Form.Group>
-            <Button color={this.state.submitButtonColor} 
-            loading={this.state.formLoading} 
-            onClick={() => {this.submitPolicy()}}>Submit</Button>
-          </Form>
-        </Container>
-      )
+      if(this.props.action == 0){
+        return(
+          <Container className="dash-form">
+            <h2>Submit policy</h2>
+            <Form>
+              <Form.Group widths='equal'>
+                <Form.Field>
+                  <label>Policy ID</label>
+                  <input placeholder='Policy ID' 
+                  onChange={evt => this.updateInput('policy_id', evt)} />
+                </Form.Field>
+                <Form.Field>
+                  <label>Policy Type</label>
+                  <input placeholder='Policy Type'
+                  onChange={evt => this.updateInput('policy_type', evt)} />
+                </Form.Field>
+              </Form.Group>
+              <Form.Group widths='equal'>
+                <Form.Field>
+                  <label>Policy Start Date</label>
+                  <input placeholder='Policy Start Date'
+                  onChange={evt => this.updateInput('policy_start', evt)} />
+                </Form.Field>
+                <Form.Field>
+                  <label>Policy End Date</label>
+                  <input placeholder='Policy End Date'
+                  onChange={evt => this.updateInput('policy_stop', evt)} />
+                </Form.Field>
+              </Form.Group>
+              <Button color={this.state.submitButtonColor} 
+              loading={this.state.formLoading} 
+              onClick={() => {this.submitPolicy()}}>Submit</Button>
+            </Form>
+          </Container>
+        )
+      }
+      else if(this.props.action == 1){
+        return(
+          <Container className="dash-form">
+            <Policy id={1} start="1 november 2017" 
+            end="1 november 2018" type="car" />
+          </Container>
+        )
+      }
+      else if(this.props.action == 2){
+
+      }
     }
     else if (this.props.user === 'jenny'){
       return(
