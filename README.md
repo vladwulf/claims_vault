@@ -7,9 +7,9 @@
 * Secure permission based access to stakeholders
 * Controls workflow programmatically, automation via 'Clever Contracts' 
 
-<a href="https://www.hostingpics.net/viewer.php?id=362122technologies.png"><img src="https://img15.hostingpics.net/thumbs/mini_362122technologies.png" alt="Heberger image" /></a>
-
 ### Preconditions for project setup
+https://github.com/VladWulf/claims_vault/blob/master/technologies.png
+
 * Install following software/frameworks to your machine:
 
 1. To check if you have Node.js installed, run this command in your terminal:
