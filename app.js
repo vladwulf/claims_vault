@@ -3,6 +3,40 @@ var app = express();
 var fs = require('fs');
 var cors = require('cors')
 
+var Datastore = require('nedb')
+  , db = new Datastore();
+
+
+function init_db(){
+    const insured = {
+        username: 'insured',
+        password: '0000', // don't laugh 
+        policies: [],
+    }
+    const insurer = {
+        username: 'insurer',
+        password: '1111', // don't laugh 
+        policies: [],
+        claims: []
+    }
+    const expert = {
+        username: 'expert',
+        password: '2222', // don't laugh 
+        claims: []
+    }
+
+    db.insert(insured)
+    db.insert(insurer)
+    db.insert(expert)
+}
+init_db()
+
+
+
+
+
+
+
 const chainApi = require('./lib/core')('http://127.0.0.1:8545');
 
 // console.log(chainApi.get_accounts());
@@ -23,11 +57,6 @@ app.use(cors())
 const PORT = 5000;
 const HOST = 'localhost';
 
-let db = {
-    vlad: '0000',
-    jenny: '1111',
-    craig: '2222'
-}
 
 
 
@@ -83,26 +112,24 @@ app.get ('/login', (req, res) =>{
     const username = req.query.username;
     const password = req.query.password;
 
-    console.log(username, password, db[username])
-    if (db[username] === password){
-        res.send({
-            msg: 'success',
-            username: username
-        })
-    }
-    else {
-        res.send({
-            msg: 'error'
-        })
-    }
-    // check if pair is correct in mongo
-
-    // if yes redirect to the user type
+    db.findOne({ username: username }, function (err, user) {
+        if(user.password === password){
+            res.send({
+                msg: 'success',
+                username: username
+            })
+        }
+        else {
+            res.send({
+                msg: 'error'
+            })
+        }
+    });
 })
 
 
 
 
-app.listen(PORT, HOST, (req, res) => {
-    console.log(`listening from ${HOST}:${PORT}`)
-})
+// app.listen(PORT, HOST, (req, res) => {
+//     console.log(`listening from ${HOST}:${PORT}`)
+// })

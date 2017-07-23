@@ -98,15 +98,13 @@ export default class Dashboard extends Component{
         )
       }
       else if(this.props.action == 1){
+        // we get all policies from db and create iterable
         return(
           <Container className="dash-form">
             <Policy id={1} start="1 november 2017" 
             end="1 november 2018" type="car" />
           </Container>
         )
-      }
-      else if(this.props.action == 2){
-
       }
     }
     else if (this.props.user === 'jenny'){
