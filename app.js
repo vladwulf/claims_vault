@@ -100,11 +100,25 @@ app.get('/claimant/make_claim', (req, res) => {
     // claimant makes a claim
 })
 
-
-app.get('/getPolicy', (req, res)=>{
+app.get('/add',(req,res)=>{
     const id = req.query.id;
-    const data = chainApi.contract_getter(abi, address, 'getPolicy', [id])
-    res.send(data);
+    db.update({username: 'insured'}, {$push: {policies: id }},(error, doc)=>{
+        if(error) res.send({msg:'error'});
+        if(doc) res.send({msg: 'success'})
+    });
+    
+})
+
+
+app.get('/getPolicies', (req, res)=>{
+    const username = req.query.user;
+    let policies = [];
+    db.findOne({username: username}, (err, user) =>{
+        user.policies.forEach((elem, i)=>{
+            policies.push(chainApi.contract_getter(abi, address, 'getPolicy', [elem]))
+        })
+        res.send(policies)
+    })
 })
 
 

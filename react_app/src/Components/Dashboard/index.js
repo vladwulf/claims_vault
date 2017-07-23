@@ -14,8 +14,30 @@ export default class Dashboard extends Component{
       policy_start: '',
       policy_stop: '',
       formLoading: false,
-      submitButtonColor: 'black'
+      submitButtonColor: 'black',
+      policies: []
     }
+  }
+
+  getPolicies(){
+    return new Promise((resolve, reject)=>{
+      axios.get('http://127.0.0.1:5000/getPolicies',{
+        params: {
+          user: this.props.user,
+        }
+      }).then((res) =>{
+        if(res.data.msg === 'success'){
+          resolve(res.data);
+        }
+        else {
+          resolve(res.data);
+        }
+      })
+      .catch((err) =>{
+        reject(err)
+      })
+    })
+    
   }
 
 
@@ -37,7 +59,7 @@ export default class Dashboard extends Component{
           formLoading: false,
           submitButtonColor: 'green'
         })
-        this.onUserChange(res.data.username);
+        // this.onUserChange(res.data.username);
       }
       else {
         this.setState({
@@ -98,13 +120,35 @@ export default class Dashboard extends Component{
         )
       }
       else if(this.props.action == 1){
+
         // we get all policies from db and create iterable
-        return(
-          <Container className="dash-form">
-            <Policy id={1} start="1 november 2017" 
-            end="1 november 2018" type="car" />
-          </Container>
-        )
+        this.getPolicies()
+        .then((res)=>{
+          console.log('YOLOOOO', res)
+          const policies = res.map((policy)=>{
+            return <Policy user={this.props.user} id={policy[0]} start={policy[4]}
+            end={policy[5]} type={policy[6]} premium={policy[3]}
+            max={policy[2]} isLive={policy[7].toString()} />
+          })
+          // console.log(policies)
+          this.setState({
+            policies: policies
+          })
+        })
+        if(this.state.policies.length === 0){
+          return <p>loading</p>
+        }
+        else {
+          return (
+            <div>
+              {this.state.policies}
+            </div>
+          )
+        }
+        
+
+
+        
       }
     }
     else if (this.props.user === 'insurer'){
