@@ -20,8 +20,10 @@
   },
   "homepage": "https://github.com/VladWulf/break_the_block#readme",
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.15.3",
     "mongoose": "^4.11.3",
-    "web3": "^0.18.4"
+    "nedb": "^1.8.0",
+    "web3": "^0.20.1"
   }
 }
