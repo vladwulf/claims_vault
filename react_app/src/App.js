@@ -67,30 +67,30 @@ class App extends Component {
         );
       }
     } else {
-      if(this.state.user === 'vlad'){
+      if(this.state.user === 'insured'){
         return(
           <div className="App">
             <NavBar options={insuredOptions} 
             dashboard={true} onChange={this.onChange.bind(this)} />
-            <Dashboard user='vlad' action={this.state.action}  />
+            <Dashboard user='insured' action={this.state.action}  />
           </div>
         )
       }
-      if(this.state.user === 'jenny'){
+      if(this.state.user === 'insurer'){
         return(
           <div className="App">
             <NavBar options={insurerOptions}
              dashboard={true} onChange={this.onChange.bind(this)} />
-            <Dashboard user='jenny' action={this.state.action} />
+            <Dashboard user='insurer' action={this.state.action} />
           </div>
         )
       }
-      if(this.state.user === 'craig'){
+      if(this.state.user === 'expert'){
         return(
           <div className="App">
             <NavBar options={expertOptions}
              dashboard={true} onChange={this.onChange.bind(this)} />
-            <Dashboard user='craig' action={this.state.action} />
+            <Dashboard user='expert' action={this.state.action} />
           </div>
         )
       }

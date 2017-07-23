@@ -60,7 +60,7 @@ export default class Dashboard extends Component{
   }
 
   render(){
-    if(this.props.user === 'vlad'){
+    if(this.props.user === 'insured'){
       if(this.props.action == 0){
         return(
           <Container className="dash-form">
@@ -107,7 +107,7 @@ export default class Dashboard extends Component{
         )
       }
     }
-    else if (this.props.user === 'jenny'){
+    else if (this.props.user === 'insurer'){
       return(
         <Container className="dash-form">
           <h2>Propose policy</h2>
@@ -150,7 +150,7 @@ export default class Dashboard extends Component{
         </Container>
       )
     }
-    else if (this.props.user === 'craig'){
+    else if (this.props.user === 'expert'){
       return(
         <h1>This is {this.props.user}</h1>
       )

@@ -69,6 +69,7 @@ app.get('/insured/submit_policy', (req, res) => {
     
     chainApi.contract_setter(abi, address, 'proposePolicy', [id, start, end, type] )
     .then((result)=>{
+        db.update({username: 'insured'}, {$push: {policies: id}})
         res.send({msg: 'success'});
         
     }).catch((error)=>{
@@ -76,6 +77,7 @@ app.get('/insured/submit_policy', (req, res) => {
         res.send({msg: 'error'});
     })
 })
+
 
 app.get('/insured/accept_policy', (req, res) => {
     // insured submits a price after valuation of policy
@@ -113,6 +115,7 @@ app.get ('/login', (req, res) =>{
     const password = req.query.password;
 
     db.findOne({ username: username }, function (err, user) {
+        if(err) console.log(err);
         if(user.password === password){
             res.send({
                 msg: 'success',
@@ -130,6 +133,6 @@ app.get ('/login', (req, res) =>{
 
 
 
-// app.listen(PORT, HOST, (req, res) => {
-//     console.log(`listening from ${HOST}:${PORT}`)
-// })
+app.listen(PORT, HOST, (req, res) => {
+    console.log(`listening from ${HOST}:${PORT}`)
+})
