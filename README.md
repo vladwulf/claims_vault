@@ -1,50 +1,75 @@
-Idea name - ClaimsVault
+# Idea name - ClaimsVault
 
-We are trying to build Self service platform for third-party claim submission. It would have following features:
+#### We are trying to build Self service platform for third-party claim submission. It would have following features:
 
-Third party claims, liked to Policy and Coverage
-Stores/shares digital artificats, evidance of claim with authorised stakeholders
-Secure permission based access to stakeholders
-Controls workflow programmatically, automation via 'Clever Contracts'
-Preconditions for project setup
+* Third party claims, liked to Policy and Coverage 
+* Stores/shares digital artificats, evidance of claim with authorised stakeholders
+* Secure permission based access to stakeholders
+* Controls workflow programmatically, automation via 'Clever Contracts' 
 
-Install following software/frameworks to your machine:
-To check if you have Node.js installed, run this command in your terminal: $ node -v To confirm that you have npm installed you can run this command in your terminal: $ npm -v if not installed - install npm from https://www.npmjs.com/ and run the above 2 commands again
+### Preconditions for project setup
+* Install following software/frameworks to your machine:
 
-Project uses lerna (A tool for managing JavaScript projects with multiple packages) $ npm install --global lerna
+1. To check if you have Node.js installed, run this command in your terminal:
+  $ node -v
+  To confirm that you have npm installed you can run this command in your terminal:
+  $ npm -v
+  if not installed - install npm from https://www.npmjs.com/ and run the above 2 commands again
+  
+2. Project uses lerna (A tool for managing JavaScript projects with multiple packages)
+  $ npm install --global lerna
+  
+3. Install express (https://expressjs.com/ - Express is a minimal and flexible Node.js web application framework)
+  $ npm install express --save
+  and
+  $ npm install express-handlebars
+  
+4. Install mongoose (http://mongoosejs.com/docs/)
+  $ npm install mongoose
 
-Install express (https://expressjs.com/ - Express is a minimal and flexible Node.js web application framework) $ npm install express --save and $ npm install express-handlebars
+### Running the project
 
-Install mongoose (http://mongoosejs.com/docs/) $ npm install mongoose
-
-Running the project
-
-checkout the repo from https://github.com/VladWulf/claims_vault Go to your project directory
-
-Install the required project dependency (packages)
+checkout the repo from https://github.com/VladWulf/claims_vault
+Go to your project directory
+1. Install the required project dependency (packages)
+```
 $ npm i
-now jump to react_app directory which contains our react app
+```
+2. now jump to react_app directory which contains our react app
+```
 $ cd react_app
-install the required project dependency (packages)
+```
+3. install the required project dependency (packages)
+```
 $ npm i
-now come back to main directory
+```
+4. now come back to main directory
+```
 $ cd ..
+```
 NB: You need to have at least a blockchain node running on localhost:8545 (rpc)
 
-Deploy contract
+5.  Deploy contract
+```
 npm run deploy
 
-Run nodejs webserver
+```
+6. Run nodejs webserver
+
+```
 npm start
-Run react (another terminal)
+```
+7. Run react (another terminal)
+```
 cd react_app
 npm start
-People
+```
 
-https://github.com/VladWulf
+### People 
+1. https://github.com/VladWulf
 
-https://github.com/polleykc
+2. https://github.com/polleykc
 
-https://github.com/varriola
+3. https://github.com/varriola
 
-https://github.com/ashutoshchauhan13
+4. https://github.com/ashutoshchauhan13
