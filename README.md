@@ -7,6 +7,8 @@
 * Secure permission based access to stakeholders
 * Controls workflow programmatically, automation via 'Clever Contracts' 
 
+<a href="https://www.hostingpics.net/viewer.php?id=362122technologies.png"><img src="https://img15.hostingpics.net/thumbs/mini_362122technologies.png" alt="Heberger image" /></a>
+
 ### Preconditions for project setup
 * Install following software/frameworks to your machine:
 
